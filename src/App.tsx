@@ -1,12 +1,10 @@
 import React from "react"
-import Layout from "./Pages/Layout"
-
-import SearchForm from "./components/SearchForm"
+import { Layout, HomePage } from "./pages/index"
 
 const App = () => {
   return (
-    <Layout>
-      <SearchForm></SearchForm>
+    <Layout type="center">
+      <HomePage />
     </Layout>
   )
 }
