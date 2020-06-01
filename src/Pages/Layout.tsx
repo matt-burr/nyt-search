@@ -3,22 +3,17 @@ import { createUseStyles } from "react-jss"
 
 interface LayoutProps {
   children: any
-  type: string
 }
 
 const createLayoutStyles = createUseStyles({
   main: {
-    textAlign: (type: string) => type,
-    color: "white",
-    padding: "32px",
+    width: "80%",
+    margin: "0 auto",
   },
 })
 
-const Layout = ({ children, ...props }: LayoutProps) => {
-  const { type } = { ...props }
-  console.log(type)
-
-  const classes = createLayoutStyles(type)
+const Layout: React.FC<LayoutProps> = ({ children, ...props }) => {
+  const classes = createLayoutStyles()
 
   return <main className={classes.main}>{children}</main>
 }

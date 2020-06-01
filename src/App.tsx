@@ -3,7 +3,7 @@ import { Layout, HomePage } from "./pages/index"
 
 const App: React.FC<any> = () => {
   return (
-    <Layout type="center">
+    <Layout>
       <HomePage />
     </Layout>
   )

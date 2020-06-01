@@ -4,7 +4,8 @@ interface IArticle {
   snippet: string
   abstract: string
   byline?: Byline
-  keywords?: Keywords
+  keywords?: Keyword
+  web_url?: string
 }
 
 type Headline = {
@@ -17,7 +18,7 @@ type Byline = {
   document_type: string
 }
 
-type Keywords = {
+type Keyword = {
   name: string
   value: string
   rank: number
