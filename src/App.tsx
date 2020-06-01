@@ -1,7 +1,7 @@
 import React from "react"
 import { Layout, HomePage } from "./pages/index"
 
-const App = () => {
+const App: React.FC<any> = () => {
   return (
     <Layout type="center">
       <HomePage />

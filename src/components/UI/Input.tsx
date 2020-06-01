@@ -1,14 +1,14 @@
 import React from "react"
 
-interface InputProps {
+type InputProps = {
   children: any
   type?: string
   name: string
   reference: any
 }
 
-const Input = ({ children, ...props }: InputProps) => {
-  const { type, name, reference } = { ...props }
+const Input: React.FC<InputProps> = (props) => {
+  const { children, type, name, reference } = { ...props }
 
   return (
     <>

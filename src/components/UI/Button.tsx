@@ -1,12 +1,12 @@
 import React from "react"
 
-interface ButtonProps {
+type ButtonProps = {
   children: string
   type?: "button" | "submit" | "reset" | undefined
 }
 
-const Button = ({ children, ...props }: ButtonProps) => {
-  const { type } = { ...props }
+const Button: React.FC<ButtonProps> = (props) => {
+  const { children, type } = { ...props }
   return <button type={type}>{children}</button>
 }
 

@@ -1,5 +1,5 @@
 import React from "react"
-import SearchForm from "../../components/SearchForm"
+import { SearchForm } from "../../components/index"
 
 const HomePage = ({ ...props }) => {
   return (
@@ -10,7 +10,7 @@ const HomePage = ({ ...props }) => {
         alt="New York Times logo"
       ></img>
       <h1>Search</h1>
-      <SearchForm />
+      <SearchForm></SearchForm>
     </>
   )
 }
