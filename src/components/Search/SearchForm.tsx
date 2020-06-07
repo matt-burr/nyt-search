@@ -1,22 +1,37 @@
-import React, { useState } from "react"
+import React from "react"
 import { useForm } from "react-hook-form"
-import { Input, Button } from "../index"
-import { IArticle } from "../../types/index"
-import { getArticles } from "../../services/ArticleSearchService"
-import SearchResults from "./SearchResults"
+import { createUseStyles } from "react-jss"
 
-interface SearchFormProps {}
+import { Input, Button } from "../index"
+import { getArticles } from "../../services/ArticleSearchService"
+
+interface SearchFormProps {
+  setHomePageArticles: any
+}
+
+const createSearchFormStyles = createUseStyles({
+  form: {
+    width: "100%",
+    color: "white",
+  },
+  button: {
+    float: "right",
+    padding: ".5rem 1rem",
+    margin: "1rem 0",
+  },
+})
 
 const SearchForm: React.FC<SearchFormProps> = (props) => {
+  const { setHomePageArticles } = { ...props }
+
+  const classes = createSearchFormStyles()
+
   const { register, handleSubmit } = useForm()
-  const [articles, setArticles] = useState<IArticle[]>([
-    { headline: { main: "" }, abstract: "", lead_paragraph: "", snippet: "" },
-  ])
 
   const handleSearchRequest = async (data: any) => {
     getArticles(data.searchQuery)
       .then((res) => {
-        setArticles(res)
+        setHomePageArticles(res, data.searchQuery)
       })
       .catch((err) => {
         console.log(err)
@@ -25,15 +40,18 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit(handleSearchRequest)}>
-          <Input name="searchQuery" type="text" reference={register}>
-            Article title
-          </Input>
-          <Button type="submit">Search</Button>
-        </form>
-      </div>
-      {articles ? <SearchResults articles={articles} /> : ""}
+      <form className={classes.form}>
+        <Input name="searchQuery" type="text" reference={register}>
+          Article title
+        </Input>
+      </form>
+      <Button
+        customStyle={classes.button}
+        onClick={handleSubmit(handleSearchRequest)}
+        type="submit"
+      >
+        Search
+      </Button>
     </>
   )
 }
