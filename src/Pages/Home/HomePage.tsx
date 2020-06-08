@@ -1,8 +1,7 @@
 import React, { useState } from "react"
 import { SearchForm, SearchResults } from "../../components/index"
 
-import IArticle from "../../types/IArticle"
-import { IApiResponse, Meta } from "../../types"
+import { IArticle, Meta } from "../../types"
 
 const HomePage = ({ ...props }) => {
   const [articles, setArticles] = useState<IArticle[]>([])

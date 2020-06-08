@@ -12,7 +12,7 @@ const StyledImage = styled.img`
 `
 
 const Image: React.FC<ImageProps> = (props) => {
-  const { src, alt, height } = { ...props }
+  const { src, alt } = { ...props }
   return <StyledImage src={src} alt={alt} />
 }
 

@@ -13,12 +13,22 @@ type AppProps = {
 }
 
 const App: React.FC<AppProps> = () => {
+  const [loading, setLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    setLoading(false)
+  })
+
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <Layout>
-        <HomePage />
-      </Layout>
+      {loading ? (
+        "Loading"
+      ) : (
+        <Layout>
+          <HomePage />
+        </Layout>
+      )}
     </ThemeProvider>
   )
 }

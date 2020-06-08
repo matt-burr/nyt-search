@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useEffect } from "react"
+import React from "react"
 import styled from "styled-components"
 
 const StyledLabel = styled.label<LabelProps>`
@@ -23,6 +23,7 @@ const StyledInput = styled.input`
   border-bottom: .1em solid white;
   color: white;
   font-family: inherit;
+  outline: none;
 }`
 
 const StyledInputGroup = styled.div``

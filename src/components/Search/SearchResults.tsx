@@ -1,5 +1,6 @@
-import React, { useEffect } from "react"
-import { createUseStyles } from "react-jss"
+import React from "react"
+import styled from "styled-components"
+
 import { IArticle, Meta } from "../../types/index"
 
 interface SearchResultsProps {
@@ -7,35 +8,32 @@ interface SearchResultsProps {
   meta: Meta | undefined
 }
 
-const useSearchResultsStyles = createUseStyles({
-  article: {
-    display: "grid",
-    padding: "8px",
-  },
-  a: {
-    color: "white",
-    fontFamily: "OpenSans-Bold",
-  },
-})
+const StyledArticle = styled.article`
+  color: ${(props) => props.theme.colors.text};
+  padding: ${(props) => props.theme.sizes.medium};
+`
+
+const StyledLink = styled.a`
+  font-family: OpenSans-Bold;
+  font-size: ${(props) => props.theme.sizes.large};
+`
 
 const SearchResults: React.FC<SearchResultsProps> = ({ articles, meta }) => {
-  const classes = useSearchResultsStyles()
-  useEffect(() => {})
   return (
     <>
       <h1>Search results</h1>
       <section>
         {articles.map((art, i) => {
           return (
-            <article key={i} className={classes.article}>
-              <a className={classes.a} href={art.web_url}>
+            <StyledArticle key={i}>
+              <StyledLink href={art.web_url}>
                 <span>{art.headline.main}</span>
-              </a>
+              </StyledLink>
               <span>{art.byline?.original}</span>
               {/* <p>LEAD PARAGRAPH {art.lead_paragraph}</p>
             <p>ABSTRACT {art.abstract}</p>
             <div>SNIPPET{art.snippet}</div> */}
-            </article>
+            </StyledArticle>
           )
         })}
       </section>
