@@ -2,23 +2,24 @@ import React, { useState } from "react"
 import { SearchForm, SearchResults } from "../../components/index"
 
 import IArticle from "../../types/IArticle"
+import { IApiResponse, Meta } from "../../types"
 
 const HomePage = ({ ...props }) => {
   const [articles, setArticles] = useState<IArticle[]>([])
-  const [query, setQuery] = useState<string>("")
+  const [meta, setMeta] = useState<Meta>()
 
   const areResultsDisplayed = articles.length > 0
 
-  const getSearchFormArticles = (data: IArticle[], query: string) => {
+  const getSearchFormArticles = (data: IArticle[], meta: Meta) => {
     setArticles(data)
-    setQuery(query)
+    setMeta(meta)
   }
 
   return (
     <>
       <SearchForm setHomePageArticles={getSearchFormArticles}></SearchForm>
       {areResultsDisplayed ? (
-        <SearchResults query={query} articles={articles}></SearchResults>
+        <SearchResults meta={meta} articles={articles}></SearchResults>
       ) : (
         <></>
       )}

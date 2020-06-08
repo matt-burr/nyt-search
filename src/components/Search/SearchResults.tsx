@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import { createUseStyles } from "react-jss"
-import { IArticle } from "../../types/index"
+import { IArticle, Meta } from "../../types/index"
 
 interface SearchResultsProps {
   articles: IArticle[]
-  query: string
+  meta: Meta | undefined
 }
 
 const useSearchResultsStyles = createUseStyles({
@@ -18,16 +18,13 @@ const useSearchResultsStyles = createUseStyles({
   },
 })
 
-const SearchResults: React.FC<SearchResultsProps> = ({ articles, query }) => {
+const SearchResults: React.FC<SearchResultsProps> = ({ articles, meta }) => {
   const classes = useSearchResultsStyles()
   useEffect(() => {})
   return (
     <>
+      <h1>Search results</h1>
       <section>
-        <span>
-          Your '{query}' query returned {articles.length} result
-          {articles.length % 10 === 1 ? "" : "s"}
-        </span>
         {articles.map((art, i) => {
           return (
             <article key={i} className={classes.article}>

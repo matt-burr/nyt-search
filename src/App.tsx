@@ -1,11 +1,25 @@
 import React from "react"
 import { Layout, HomePage } from "./pages/index"
+import {
+  ThemeProvider,
+  GlobalStyleComponent,
+  DefaultTheme,
+} from "styled-components"
+import { GlobalStyles, Theme } from "./styles/index"
 
-const App: React.FC<any> = () => {
+type AppProps = {
+  GlobalStyles: GlobalStyleComponent<{}, DefaultTheme>
+  Theme: DefaultTheme
+}
+
+const App: React.FC<AppProps> = () => {
   return (
-    <Layout>
-      <HomePage />
-    </Layout>
+    <ThemeProvider theme={Theme}>
+      <GlobalStyles />
+      <Layout>
+        <HomePage />
+      </Layout>
+    </ThemeProvider>
   )
 }
 

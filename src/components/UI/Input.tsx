@@ -1,52 +1,47 @@
-import React from "react"
-import { createUseStyles } from "react-jss"
+import React, { InputHTMLAttributes, useEffect } from "react"
+import styled from "styled-components"
 
-const useInputStyles = createUseStyles({
-  inputGroup: {},
-  label: {
-    width: "100%",
-    position: "relative",
-    top: "1.75rem",
-    left: "0.75rem",
-    fontSize: "32px",
-    lineHeight: "32px",
-    transition: "all .2s ease-in-out",
-    zIndex: 10,
-  },
-  labelActive: {
-    top: "0",
-    fontSize: "16px",
-    left: ".75rem",
-  },
-  input: {
-    boxSizing: "border-box",
-    width: "100%",
-    background: "transparent",
-    fontSize: "32px",
-    border: "none",
-    borderBottom: ".1rem solid white",
-    color: "white",
-    "&:focus": {
-      outline: "none",
-    },
-    "&::placeholder": {
-      fontStyle: "italic",
-      color: "white",
-    },
-  },
-})
+const StyledLabel = styled.label<LabelProps>`
+  width: 100%;
+  position: relative;
+  left: 16px;
+  top: ${(props) => (props.isActive ? ".5em" : "1em")};
+  font-size: ${(props) =>
+    props.isActive ? props.theme.sizes.medium : props.theme.sizes.xLarge};
+  line-height: ${(props) => props.theme.sizes.xLarge};
+  transition: all 0.2s ease-in-out;
+  z-index: 10;
+`
 
-type InputProps = {
-  children: any
+const StyledInput = styled.input`
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 .5em;
+  background: transparent;
+  font-size: ${(props) => props.theme.sizes.xLarge};
+  border: none;
+  border-bottom: .1em solid white;
+  color: white;
+  font-family: inherit;
+}`
+
+const StyledInputGroup = styled.div``
+
+interface InputProps {
+  readonly children: any
   type?: string
   name: string
   reference: any
+  autocomplete: string
+}
+
+type LabelProps = {
+  isActive?: boolean
 }
 
 const Input: React.FC<InputProps> = (props) => {
   const [fieldActive, setFieldActive] = React.useState(false)
-  const { children, type, name, reference } = { ...props }
-  const classes = useInputStyles()
+  const { children, type, name, reference, autocomplete } = { ...props }
 
   const handleFocus = () => {
     setFieldActive(true)
@@ -59,24 +54,20 @@ const Input: React.FC<InputProps> = (props) => {
   }
 
   return (
-    <div className={classes.inputGroup}>
-      <label
-        className={`${classes.label} ${fieldActive ? classes.labelActive : ""}`}
-        htmlFor={name}
-      >
+    <StyledInputGroup>
+      <StyledLabel isActive={fieldActive} htmlFor={name}>
         {children}
-      </label>
-      <input
+      </StyledLabel>
+      <StyledInput
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className={classes.input}
+        autoComplete={autocomplete}
         name={name}
         id={name}
         type={type}
         ref={reference}
-      ></input>
-    </div>
+      ></StyledInput>
+    </StyledInputGroup>
   )
 }
-
 export default Input

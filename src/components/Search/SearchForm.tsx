@@ -1,37 +1,30 @@
 import React from "react"
+import styled from "styled-components"
 import { useForm } from "react-hook-form"
-import { createUseStyles } from "react-jss"
 
 import { Input, Button } from "../index"
-import { getArticles } from "../../services/ArticleSearchService"
+import { getNytResponse } from "../../services/ArticleSearchService"
 
 interface SearchFormProps {
   setHomePageArticles: any
 }
 
-const createSearchFormStyles = createUseStyles({
+const StyledForm = styled.form`
   form: {
     width: "100%",
     color: "white",
-  },
-  button: {
-    float: "right",
-    padding: ".5rem 1rem",
-    margin: "1rem 0",
-  },
-})
+`
 
 const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { setHomePageArticles } = { ...props }
 
-  const classes = createSearchFormStyles()
-
   const { register, handleSubmit } = useForm()
 
   const handleSearchRequest = async (data: any) => {
-    getArticles(data.searchQuery)
+    getNytResponse(data.searchQuery)
       .then((res) => {
-        setHomePageArticles(res, data.searchQuery)
+        const { docs, meta } = res.response
+        setHomePageArticles(docs, meta)
       })
       .catch((err) => {
         console.log(err)
@@ -39,20 +32,21 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
   }
 
   return (
-    <>
-      <form className={classes.form}>
-        <Input name="searchQuery" type="text" reference={register}>
+    <div>
+      <StyledForm>
+        <Input
+          autocomplete="off"
+          name="searchQuery"
+          type="text"
+          reference={register}
+        >
           Article title
         </Input>
-      </form>
-      <Button
-        customStyle={classes.button}
-        onClick={handleSubmit(handleSearchRequest)}
-        type="submit"
-      >
+      </StyledForm>
+      <Button onClick={handleSubmit(handleSearchRequest)} type="submit">
         Search
       </Button>
-    </>
+    </div>
   )
 }
 

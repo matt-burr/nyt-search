@@ -1,6 +1,6 @@
 import IArticle from "./IArticle"
 
-interface IApiResponse {
+export interface IApiResponse {
   status: boolean
   copyright: string
   response: {
@@ -9,10 +9,8 @@ interface IApiResponse {
   }
 }
 
-type Meta = {
+export interface Meta {
   hits: number
   offset: number
   time: number
 }
-
-export default IApiResponse

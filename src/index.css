@@ -1,18 +1,3 @@
-body {
-  height: 100vh;
-  margin: 0;
-  font-family: 'OpenSans-Light';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(
-    circle at 100%,
-    #333,
-    #333 50%,
-    rgb(0, 0, 0) 75%,
-    #333 75%
-  );
-}
-
 @font-face {
   font-family: 'OpenSans-Light';
   src: local('OpenSans-Light'), url(./assets//fonts/Open_Sans/OpenSans-Light.ttf) format('truetype');
