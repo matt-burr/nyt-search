@@ -8,9 +8,12 @@ type ButtonProps = {
 }
 
 const StyledButton = styled.button`
-  float: right;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
+  font-family: OpenSans-Bold;
+  font-size: ${(props) => props.theme.sizes.medium};
+  background: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
 `
 
 const Button: React.FC<ButtonProps> = (props) => {

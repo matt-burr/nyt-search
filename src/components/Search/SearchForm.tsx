@@ -13,7 +13,6 @@ const StyledForm = styled.form`
   form: {
     width: "100%";
     color: "white";
-    min-height: 200px;
 `
 
 const SearchForm: React.FC<SearchFormProps> = (props) => {

@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         min-height: 100%;
+        font-size: 16px;
         margin: 0;
         color: white;
         font-family: 'OpenSans-Light';

@@ -33,6 +33,14 @@ const StyledFooter = styled.footer`
   align-items: center;
 `
 
+const Title = styled.div`
+  color: ${(props) => props.theme.colors.text};
+  font-size: ${(props) => props.theme.sizes.xLarge};
+  @media ${(props) => props.theme.mq.mobile} {
+    font-size: ${(props) => props.theme.sizes.large};
+  }
+`
+
 const Layout: React.FC<LayoutProps> = ({ children, ...props }) => {
   return (
     <StyledLayout>
@@ -41,7 +49,7 @@ const Layout: React.FC<LayoutProps> = ({ children, ...props }) => {
           src="/images/The_New_York_Times_logo1.png"
           alt="New York Times logo"
         />
-        <h1>Search</h1>
+        <Title>Search</Title>
       </StyledHeader>
       <StyledMain>{children}</StyledMain>
       <StyledFooter>

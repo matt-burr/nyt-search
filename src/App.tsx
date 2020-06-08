@@ -17,7 +17,7 @@ const App: React.FC<AppProps> = () => {
 
   React.useEffect(() => {
     setLoading(false)
-  })
+  }, [loading])
 
   return (
     <ThemeProvider theme={Theme}>

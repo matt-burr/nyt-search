@@ -7,10 +7,13 @@ const Theme: DefaultTheme = {
     accent: "red",
   },
   sizes: {
-    small: "12px",
-    medium: "16px",
-    large: "24px",
-    xLarge: "32px",
+    small: "0.75rem",
+    medium: "1rem",
+    large: "1.5rem",
+    xLarge: "2rem",
+  },
+  mq: {
+    mobile: "(max-width: 475px)",
   },
 }
 

@@ -9,6 +9,9 @@ type ImageProps = {
 
 const StyledImage = styled.img`
   height: 72px;
+  @media ${(props) => props.theme.mq.mobile} {
+    height: 36px;
+  }
 `
 
 const Image: React.FC<ImageProps> = (props) => {
