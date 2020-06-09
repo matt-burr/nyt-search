@@ -6,6 +6,7 @@ interface IArticle {
   byline?: Byline
   keywords?: Keyword
   web_url?: string
+  pub_date?: string
 }
 
 type Headline = {

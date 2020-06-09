@@ -4,12 +4,14 @@ import styled from "styled-components"
 type ButtonProps = {
   children: string
   type?: "button" | "submit" | "reset" | undefined
+  alignment?: string
+  margin?: string
   onClick: any
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<ButtonProps>`
   padding: 0.5rem 1rem;
-  margin: 1rem 0;
+  margin: ${(props) => props.margin};
   font-family: OpenSans-Bold;
   font-size: ${(props) => props.theme.sizes.medium};
   background: ${(props) => props.theme.colors.background};
@@ -17,9 +19,19 @@ const StyledButton = styled.button`
 `
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { children, type, onClick } = { ...props }
+  const { children, type, onClick, alignment } = { ...props }
+
+  const alignmentMap: { [key: string]: string } = {
+    right: "1rem 0 0 1rem",
+    left: "0 0 1rem 1rem",
+    default: "1rem 1rem 1rem 1rem",
+  }
+
+  const margin = alignmentMap[alignment || "default"]
+
+  console.log(alignment)
   return (
-    <StyledButton onClick={onClick} type={type}>
+    <StyledButton margin={margin} onClick={onClick} type={type}>
       {children}
     </StyledButton>
   )

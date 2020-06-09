@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 
 import { Input, Button } from "../index"
 import { getNytResponse } from "../../services/ArticleSearchService"
+import Dropdown from "../UI/Dropdown"
 
 interface SearchFormProps {
   setHomePageArticles: any
@@ -13,6 +14,7 @@ const StyledForm = styled.form`
   form: {
     width: "100%";
     color: "white";
+    font-size: ${(props) => props.theme.sizes.xLarge}
 `
 
 const SearchForm: React.FC<SearchFormProps> = (props) => {
@@ -20,10 +22,11 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
 
   const { register, handleSubmit } = useForm()
 
-  const handleSearchRequest = async (data: any) => {
+  const handleSearchRequest = (data: any) => {
     getNytResponse(data.searchQuery)
       .then((res) => {
         const { docs, meta } = res.response
+        console.log(docs)
         setHomePageArticles(docs, meta)
       })
       .catch((err) => {
@@ -42,10 +45,17 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
         >
           Article title
         </Input>
+        <Dropdown>
+          {["Article", "Children yeyeye", "Determinism > Free will"]}
+        </Dropdown>
+        <Button
+          alignment="right"
+          onClick={handleSubmit(handleSearchRequest)}
+          type="submit"
+        >
+          Search
+        </Button>
       </StyledForm>
-      <Button onClick={handleSubmit(handleSearchRequest)} type="submit">
-        Search
-      </Button>
     </div>
   )
 }

@@ -5,9 +5,8 @@ const StyledLabel = styled.label<LabelProps>`
   width: 100%;
   position: relative;
   left: 16px;
-  top: ${(props) => (props.isActive ? ".5em" : "1em")};
-  font-size: ${(props) =>
-    props.isActive ? props.theme.sizes.medium : props.theme.sizes.xLarge};
+  top: ${(props) => (props.isActive ? "1em" : "1.5em")};
+  font-size: ${(props) => (props.isActive ? ".5em" : "1em")};
   line-height: ${(props) => props.theme.sizes.xLarge};
   transition: all 0.2s ease-in-out;
   z-index: 10;
@@ -16,7 +15,7 @@ const StyledLabel = styled.label<LabelProps>`
 const StyledInput = styled.input`
   box-sizing: border-box;
   width: 100%;
-  padding: 0 .5em;
+  padding: .25em .5em;
   background: transparent;
   font-size: ${(props) => props.theme.sizes.xLarge};
   border: none;
@@ -26,7 +25,9 @@ const StyledInput = styled.input`
   outline: none;
 }`
 
-const StyledInputGroup = styled.div``
+const StyledInputGroup = styled.div`
+  font-size: ${(props) => props.theme.sizes.xLarge};
+`
 
 interface InputProps {
   readonly children: any

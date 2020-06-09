@@ -45,11 +45,11 @@ const Layout: React.FC<LayoutProps> = ({ children, ...props }) => {
   return (
     <StyledLayout>
       <StyledHeader>
+        <Title>Search</Title>
         <Image
           src="/images/The_New_York_Times_logo1.png"
           alt="New York Times logo"
         />
-        <Title>Search</Title>
       </StyledHeader>
       <StyledMain>{children}</StyledMain>
       <StyledFooter>
