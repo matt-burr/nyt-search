@@ -6,7 +6,6 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         min-height: 100%;
-        font-size: 16px;
         margin: 0;
         color: white;
         font-family: 'OpenSans-Light';
@@ -19,6 +18,9 @@ const GlobalStyles = createGlobalStyle`
         rgb(0, 0, 0) 75%,
         #333 75%
         );
+        @media ${(props) => props.theme.mq.mobile} {
+            font-size: ${(props) => props.theme.sizes.medium}
+        }
     }`
 
 export default GlobalStyles

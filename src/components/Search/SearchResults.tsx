@@ -31,6 +31,7 @@ const StyledLink = styled.a`
 const SearchResults: React.FC<SearchResultsProps> = ({ articles, meta }) => {
   return (
     <>
+      <hr />
       <Title>Search results</Title>
       <section>
         {articles.map((art, i) => {
@@ -39,11 +40,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ articles, meta }) => {
               <StyledLink href={art.web_url}>
                 <span>{art.headline.main}</span>
               </StyledLink>
+              <br />
               <span>
                 {art.pub_date && new Date(art.pub_date).toLocaleDateString()}
-              </span>
+              </span>{" "}
               <span>{art.byline?.original}</span>
-
               {/* <p>LEAD PARAGRAPH {art.lead_paragraph}</p>
             <p>ABSTRACT {art.abstract}</p>
             <div>SNIPPET{art.snippet}</div> */}

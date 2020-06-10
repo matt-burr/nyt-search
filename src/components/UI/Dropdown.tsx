@@ -4,6 +4,7 @@ import styled from "styled-components"
 type DropdownProps = {
   multiselect?: boolean
   children: Array<string>
+  reference: any
 }
 
 const StyledDropdown = styled.select`

@@ -17,19 +17,21 @@ const App: React.FC<AppProps> = () => {
 
   React.useEffect(() => {
     setLoading(false)
-  }, [loading])
+  }, [])
 
   return (
-    <ThemeProvider theme={Theme}>
-      <GlobalStyles />
-      {loading ? (
-        "Loading"
-      ) : (
-        <Layout>
-          <HomePage />
-        </Layout>
-      )}
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={Theme}>
+        <GlobalStyles />
+        {loading ? (
+          "Loading"
+        ) : (
+          <Layout>
+            <HomePage />
+          </Layout>
+        )}
+      </ThemeProvider>
+    </>
   )
 }
 
