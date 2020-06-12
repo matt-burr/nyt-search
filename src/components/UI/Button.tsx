@@ -6,7 +6,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset" | undefined
   alignment?: string
   margin?: string
-  onClick: any
+  onClick?: any
 }
 
 const StyledButton = styled.button<ButtonProps>`

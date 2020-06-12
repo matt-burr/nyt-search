@@ -7,37 +7,41 @@ import {
   getNytResponse,
   buildNytQuery,
 } from "../../services/ArticleSearchService"
-import { INytQueryParams } from "../../types"
 
 interface SearchFormProps {
-  setHomePageArticles: any
+  setHomePageArticles?: any
+  ref?: React.RefObject<HTMLFormElement>
+  transform: string
 }
 
-const StyledForm = styled.form`
-  width: "100%";
-  color: "white";
+type FormData = {
+  q: string
+  begin_date: string
+  end_date: string
+  sort: string
+}
+
+const StyledForm = styled.form<SearchFormProps>`
+  transition: all 1s ease;
+  transform: ${(props) => props.transform};
   & > * {
     margin: ${(props) => props.theme.sizes.small} 0;
   }
 `
 
 const SearchForm: React.FC<SearchFormProps> = (props) => {
-  const { setHomePageArticles } = { ...props }
+  const { setHomePageArticles, transform } = { ...props }
 
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit } = useForm<FormData>()
 
-  const handleSearchRequest = (data: any) => {
-    const alignmentMap: { [key: string]: string } = {
-      right: "1rem 0 0 1rem",
-      left: "0 0 1rem 1rem",
-      default: "1rem 1rem 1rem 1rem",
-    }
-
+  const handleSearchRequest = ({ q, begin_date, end_date, sort }: FormData) => {
     const params: { [key: string]: string } = {
-      q: data.q,
-      begin_date: data.begin_date,
-      end_date: data.end_date,
+      q,
+      begin_date,
+      end_date,
+      sort,
     }
+    console.log(sort)
 
     buildNytQuery(params).then((query) => {
       console.log(query)
@@ -53,13 +57,21 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
 
   return (
     <div>
-      <StyledForm>
-        <TextInput autocomplete="off" name="q" type="text" reference={register}>
-          Article title
+      <StyledForm
+        transform={transform}
+        onSubmit={handleSubmit(handleSearchRequest)}
+      >
+        <TextInput
+          autocomplete="off"
+          name="q"
+          type="text"
+          reference={register({ required: true, minLength: 3 })}
+        >
+          Article title *
         </TextInput>
-        {/* <Dropdown reference={register}>
-          {["Article", "Children yeyeye", "Determinism > Free will"]}
-        </Dropdown> */}
+        <Dropdown reference={register} label="Sort" name="name">
+          {["Newest", "Oldest"]}
+        </Dropdown>
         <DateInput
           type="date"
           label="Start date: "
@@ -72,11 +84,7 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
           name="end_date"
           reference={register}
         ></DateInput>
-        <Button
-          alignment="right"
-          onClick={handleSubmit(handleSearchRequest)}
-          type="submit"
-        >
+        <Button alignment="right" type="submit">
           Search
         </Button>
       </StyledForm>

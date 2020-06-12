@@ -32,6 +32,7 @@ const StyledInputGroup = styled.div`
 interface InputProps {
   readonly children: any
   type?: string
+  minLength?: number
   name: string
   reference: any
   autocomplete: string
@@ -43,7 +44,9 @@ type LabelProps = {
 
 const Input: React.FC<InputProps> = (props) => {
   const [fieldActive, setFieldActive] = React.useState(false)
-  const { children, type, name, reference, autocomplete } = { ...props }
+  const { children, type, name, reference, autocomplete, minLength } = {
+    ...props,
+  }
 
   const handleFocus = () => {
     setFieldActive(true)
@@ -64,6 +67,7 @@ const Input: React.FC<InputProps> = (props) => {
         onBlur={handleBlur}
         onFocus={handleFocus}
         autoComplete={autocomplete}
+        minLength={minLength}
         name={name}
         id={name}
         type={type}

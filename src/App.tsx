@@ -6,6 +6,7 @@ import {
   DefaultTheme,
 } from "styled-components"
 import { GlobalStyles, Theme } from "./styles/index"
+import { Loader } from "./components/index"
 
 type AppProps = {
   GlobalStyles: GlobalStyleComponent<{}, DefaultTheme>
@@ -17,14 +18,14 @@ const App: React.FC<AppProps> = () => {
 
   React.useEffect(() => {
     setLoading(false)
-  }, [])
+  }, [loading])
 
   return (
     <>
       <ThemeProvider theme={Theme}>
         <GlobalStyles />
         {loading ? (
-          "Loading"
+          <Loader></Loader>
         ) : (
           <Layout>
             <HomePage />

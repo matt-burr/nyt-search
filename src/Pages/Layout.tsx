@@ -20,9 +20,14 @@ const StyledHeader = styled.header`
 
 const StyledMain = styled.main`
   width: 80%;
-  grid-row: 2;
   margin: 0 auto;
+  padding: ${(props) => props.theme.spacing.large};
+  grid-row: 2;
   color: white;
+  @media ${(props) => props.theme.mq.mobile} {
+    box-sizing: border-box;
+    width: 100%;
+  }
 `
 
 const StyledFooter = styled.footer`

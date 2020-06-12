@@ -10,7 +10,7 @@ type ImageProps = {
 const StyledImage = styled.img`
   height: 4em;
   @media ${(props) => props.theme.mq.mobile} {
-    height: 2em;
+    height: 3em;
   }
 `
 

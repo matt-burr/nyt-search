@@ -22,6 +22,7 @@ const StyledInput = styled.input`
   font-size: ${(props) => props.theme.sizes.medium};
   font-family: OpenSans-Light;
   outline: none;
+  min-width: 160px;
 `
 
 const Datepicker: React.FC<DatepickerProps> = (props) => {

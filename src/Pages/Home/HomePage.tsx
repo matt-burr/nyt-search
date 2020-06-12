@@ -16,7 +16,10 @@ const HomePage = ({ ...props }) => {
 
   return (
     <>
-      <SearchForm setHomePageArticles={getSearchFormArticles}></SearchForm>
+      <SearchForm
+        transform={areResultsDisplayed ? "translateY(-25%)" : "scale(1.05)"}
+        setHomePageArticles={getSearchFormArticles}
+      ></SearchForm>
       {areResultsDisplayed ? (
         <SearchResults meta={meta} articles={articles}></SearchResults>
       ) : (

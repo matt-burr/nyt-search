@@ -12,6 +12,11 @@ const Theme: DefaultTheme = {
     large: "1.5rem",
     xLarge: "2rem",
   },
+  spacing: {
+    small: "8px",
+    medium: "16px",
+    large: "32px",
+  },
   mq: {
     mobile: "(max-width: 475px)",
   },

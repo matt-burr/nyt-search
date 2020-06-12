@@ -13,6 +13,11 @@ declare module "styled-components" {
       large: string
       xLarge: string
     }
+    spacing: {
+      small: string
+      medium: string
+      large: string
+    }
     mq: {
       mobile: string
     }

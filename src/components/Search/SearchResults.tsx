@@ -18,7 +18,7 @@ const Title = styled.div`
 
 const StyledArticle = styled.article`
   color: ${(props) => props.theme.colors.text};
-  padding: ${(props) => props.theme.sizes.medium};
+  padding: ${(props) => props.theme.sizes.medium} 0;
   box-sizing: border-box;
 `
 
@@ -26,6 +26,9 @@ const StyledLink = styled.a`
   font-family: OpenSans-Bold;
   font-size: ${(props) => props.theme.sizes.large};
   color: ${(props) => props.theme.colors.text};
+  @media ${(props) => props.theme.mq.mobile} {
+    font-size: ${(props) => props.theme.sizes.medium};
+  }
 `
 
 const SearchResults: React.FC<SearchResultsProps> = ({ articles, meta }) => {

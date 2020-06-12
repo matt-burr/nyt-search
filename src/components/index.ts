@@ -6,3 +6,5 @@ export { default as DateInput } from "./UI/DateInput"
 
 export { default as SearchForm } from "./Search/SearchForm"
 export { default as SearchResults } from "./Search/SearchResults"
+
+export { default as Loader } from "./Loader"
