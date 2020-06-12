@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios"
-import { IApiResponse, INytQueryParams } from "../types/index"
+import { IApiResponse } from "../types/index"
 
 const nytInstance = axios.create({
   baseURL: "https://api.nytimes.com/svc/search/v2/",

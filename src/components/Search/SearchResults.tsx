@@ -36,6 +36,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({ articles, meta }) => {
     <>
       <hr />
       <Title>Search results</Title>
+      <span>
+        Displaying {articles.length} of {meta?.hits} results
+      </span>
       <section>
         {articles.map((art, i) => {
           return (
