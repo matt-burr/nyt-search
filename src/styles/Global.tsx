@@ -26,9 +26,13 @@ const GlobalStyles = createGlobalStyle`
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
-    } input {
+    } input, select {
+        -webkit-appearance: none;
+        -moz-appearance:    none;
+        appearance:         none;   
+        -webkit-border-radius: 0;  
+        -moz-border-radius: 0;
         border-radius: 0;
-        -webkit-appearence: none;
     }`
 
 export default GlobalStyles
