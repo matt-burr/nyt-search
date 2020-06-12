@@ -21,18 +21,18 @@ const App: React.FC<AppProps> = () => {
   }, [loading])
 
   return (
-    <>
-      <ThemeProvider theme={Theme}>
-        <GlobalStyles />
-        {loading ? (
-          <Loader></Loader>
-        ) : (
+    <ThemeProvider theme={Theme}>
+      {loading ? (
+        <Loader></Loader>
+      ) : (
+        <>
+          <GlobalStyles />
           <Layout>
             <HomePage />
           </Layout>
-        )}
-      </ThemeProvider>
-    </>
+        </>
+      )}
+    </ThemeProvider>
   )
 }
 
