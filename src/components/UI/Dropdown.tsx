@@ -38,7 +38,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
       <StyledDropdown name={name} ref={reference}>
         {children.map((option, i) => {
           return (
-            <option key={i} value={option}>
+            <option key={i} value={option.toLowerCase()}>
               {option}
             </option>
           )

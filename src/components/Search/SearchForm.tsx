@@ -1,17 +1,19 @@
 import React from "react"
-import styled from "styled-components"
-import { useForm } from "react-hook-form"
+import styled, { keyframes } from "styled-components"
+import { useForm, NestDataObject, FieldError } from "react-hook-form"
 
 import { TextInput, Button, DateInput, Dropdown } from "../index"
 import {
   getNytResponse,
   buildNytQuery,
 } from "../../services/ArticleSearchService"
+import INytQueryParams from "../../types/INytQueryParams"
 
 interface SearchFormProps {
   setHomePageArticles?: any
   ref?: React.RefObject<HTMLFormElement>
-  transform: string
+  transform?: string
+  errors?: NestDataObject<FormData, FieldError>
 }
 
 type FormData = {
@@ -29,26 +31,29 @@ const StyledForm = styled.form<SearchFormProps>`
   }
 `
 
+const Error = styled.div<SearchFormProps>`
+  transition: max-height 1s ease;
+  overflow: hidden;
+  margin: 0px;
+`
+
 const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { setHomePageArticles, transform } = { ...props }
 
-  const { register, handleSubmit } = useForm<FormData>()
+  const { register, errors, handleSubmit } = useForm<FormData>()
 
   const handleSearchRequest = ({ q, begin_date, end_date, sort }: FormData) => {
-    const params: { [key: string]: string } = {
+    const params: INytQueryParams<{ [key: string]: string }> = {
       q,
       begin_date,
       end_date,
       sort,
     }
-    console.log(sort)
 
     buildNytQuery(params).then((query) => {
-      console.log(query)
       getNytResponse(query)
         .then((res) => {
           const { docs, meta } = res.response
-          console.log(docs)
           setHomePageArticles(docs, meta)
         })
         .catch((err) => console.log(err))
@@ -65,11 +70,16 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
           autocomplete="off"
           name="q"
           type="text"
+          aria-invalid={errors.q ? "true" : "false"}
+          aria-describedby="queryError"
           reference={register({ required: true, minLength: 3 })}
         >
           Article title *
         </TextInput>
-        <Dropdown reference={register} label="Sort" name="name">
+        <Error id="queryError" style={{ maxHeight: errors.q ? "32px" : "0" }}>
+          {errors.q && "Input needs to be minimum 3 characters long!"}
+        </Error>
+        <Dropdown reference={register} label="Sort" name="sort">
           {["Newest", "Oldest"]}
         </Dropdown>
         <DateInput
