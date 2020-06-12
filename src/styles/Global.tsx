@@ -26,7 +26,9 @@ const GlobalStyles = createGlobalStyle`
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
-        
+    } input {
+        border-radius: 0;
+        -webkit-appearence: none;
     }`
 
 export default GlobalStyles
