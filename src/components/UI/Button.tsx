@@ -7,6 +7,7 @@ type ButtonProps = {
   alignment?: string
   margin?: string
   onClick?: any
+  disabled?: boolean
 }
 
 const StyledButton = styled.button<ButtonProps>`
@@ -19,7 +20,7 @@ const StyledButton = styled.button<ButtonProps>`
 `
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { children, type, onClick, alignment } = { ...props }
+  const { children, type, onClick, alignment, disabled } = { ...props }
 
   const alignmentMap: { [key: string]: string } = {
     right: "1rem 0 0 1rem",
@@ -30,7 +31,12 @@ const Button: React.FC<ButtonProps> = (props) => {
   const margin = alignmentMap[alignment || "default"]
 
   return (
-    <StyledButton margin={margin} onClick={onClick} type={type}>
+    <StyledButton
+      margin={margin}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+    >
       {children}
     </StyledButton>
   )

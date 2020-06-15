@@ -6,6 +6,7 @@ type DatepickerProps = {
   name: string
   label: string
   type: string
+  onChange?: any
 }
 
 const StyledDatepicker = styled.div`
@@ -23,14 +24,25 @@ const StyledInput = styled.input`
   font-family: OpenSans-Light;
   outline: none;
   min-width: 160px;
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+  &::-webkit-calendar-picker-indicator {
+    background: url(./images/Feather-core-calendar.svg) center/80% no-repeat;
+  }
 `
 
 const Datepicker: React.FC<DatepickerProps> = (props) => {
-  const { reference, name, type, label } = props
+  const { reference, name, type, label, onChange } = props
   return (
     <StyledDatepicker>
       <label>{label}</label>
-      <StyledInput name={name} type={type} ref={reference} />
+      <StyledInput
+        onChange={onChange}
+        name={name}
+        type={type}
+        ref={reference}
+      />
     </StyledDatepicker>
   )
 }

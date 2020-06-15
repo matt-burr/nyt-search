@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ChangeEvent } from "react"
 import styled from "styled-components"
 import { useForm, NestDataObject, FieldError } from "react-hook-form"
 
@@ -40,7 +40,41 @@ const Error = styled.div<SearchFormProps>`
 const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { setHomePageArticles, transform } = { ...props }
 
-  const { register, errors, handleSubmit } = useForm<FormData>()
+  const { register, errors, handleSubmit, setError, clearError } = useForm<
+    FormData
+  >()
+
+  const validateBeginDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const today = new Date().getTime()
+    const start = new Date(e.target.value).getTime()
+
+    start > today
+      ? setError(
+          "begin_date",
+          "string",
+          "Start date cannot occur in the future"
+        )
+      : clearError("begin_date")
+  }
+
+  const validateEndDate = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const today = new Date().getTime()
+    const end = new Date(e.target.value).getTime()
+
+    end < today
+      ? setError("end_date", "string", "End date cannot occur in the past")
+      : clearError("end_date")
+  }
+
+  const validateDates = async (
+    start_date: string,
+    end_date: string
+  ): Promise<boolean> => {
+    const start = new Date(start_date).getTime()
+    const end = new Date(end_date).getTime()
+
+    return end ? end - start > 0 : true
+  }
 
   const handleSearchRequest = ({ q, begin_date, end_date, sort }: FormData) => {
     const params: INytQueryParams<{ [key: string]: string }> = {
@@ -50,13 +84,22 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
       sort,
     }
 
-    buildNytQuery(params).then((query) => {
-      getNytResponse(query)
-        .then((res) => {
-          const { docs, meta } = res.response
-          setHomePageArticles(docs, meta)
-        })
-        .catch((err) => console.log(err))
+    validateDates(begin_date, end_date).then((res) => {
+      res
+        ? buildNytQuery(params).then((query) => {
+            getNytResponse(query)
+              .then((res) => {
+                clearError("end_date")
+                const { docs, meta } = res.response
+                setHomePageArticles(docs, meta)
+              })
+              .catch((err) => console.log(err))
+          })
+        : setError(
+            "end_date",
+            "string",
+            "Start date cannot be greater than end date"
+          )
     })
   }
 
@@ -76,7 +119,7 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
         >
           Article title *
         </TextInput>
-        <Error id="queryError" style={{ maxHeight: errors.q ? "32px" : "0" }}>
+        <Error style={{ maxHeight: errors.q ? "32px" : "0" }}>
           {errors.q && "Input needs to be minimum 3 characters long!"}
         </Error>
         <Dropdown reference={register} label="Sort" name="sort">
@@ -87,13 +130,21 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
           label="Start date: "
           name="begin_date"
           reference={register}
+          onChange={validateBeginDate}
         ></DateInput>
+        <Error style={{ maxHeight: errors.begin_date ? "32px" : "0" }}>
+          {errors.begin_date && errors.begin_date.message}
+        </Error>
         <DateInput
           type="date"
           label="End date: "
           name="end_date"
-          reference={register}
+          reference={register()}
+          onChange={validateEndDate}
         ></DateInput>
+        <Error style={{ maxHeight: errors.end_date ? "32px" : "0" }}>
+          {errors.end_date && errors.end_date.message}
+        </Error>
         <Button alignment="right" type="submit">
           Search
         </Button>
