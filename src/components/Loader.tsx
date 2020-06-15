@@ -22,7 +22,7 @@ const Rotate = styled.div`
 `
 
 const Loader: React.FC<LoaderProps> = (props) => {
-  return <Rotate>Rotujemy jejejeje</Rotate>
+  return <Rotate>App loading...</Rotate>
 }
 
 export default Loader

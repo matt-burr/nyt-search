@@ -22,12 +22,15 @@ const StyledDropdown = styled.select`
   width: auto;
   background: transparent;
   font-size: ${(props) => props.theme.sizes.medium};
-  padding: 0.25em 0.5em;
   color: ${(props) => props.theme.colors.text};
+  padding: 0.25em 0.5em;
   border: none;
   border-bottom: 0.1em solid white;
   font-family: inherit;
   outline: none;
+  option {
+    color: ${(props) => props.theme.colors.textDark};
+  }
 `
 
 const Dropdown: React.FC<DropdownProps> = (props) => {

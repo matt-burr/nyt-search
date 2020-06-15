@@ -29,7 +29,6 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   const margin = alignmentMap[alignment || "default"]
 
-  console.log(alignment)
   return (
     <StyledButton margin={margin} onClick={onClick} type={type}>
       {children}
