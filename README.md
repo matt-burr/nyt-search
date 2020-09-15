@@ -1,8 +1,8 @@
-### Simple NYT Api search
+## Simple NYT Api search
+---
+### Usage
 Enter search phrase, add timeframe and search!
-===
-
-#### Setup
+### Setup
 ```
 npm install
 ```
